@@ -36,18 +36,18 @@
                 </tr>
                 <tr>
                     <td>Return data on a single movie to the user by movie title</td>
-                    <td>/movies/[name]</td>
+                    <td>/movies/:Title</td>
                     <td>Get</td>
                     <td>none</td>
                     <td> a JSON object holding information which contains the title, director, image URL, description, and genre of a single movie by title to the user
                         <pre>
                             <code>
                                 {
+                                    id: '',
                                     title: '',
                                     description: '',
                                     director: '',
                                     genre: '',
-                                    year: '',
                                     image: '',
                                 }
                             </code>
@@ -56,14 +56,14 @@
                 </tr>
                 <tr>
                     <td>Return data about a genre by name</td>
-                    <td>/movies/genre/[genreName]</td>
+                    <td>/movies/genre/:Name</td>
                     <td>Get</td>
                     <td>none</td>
                     <td>A JSON object holding data about the type of genre:
                         <pre>
                             <code>
                                 {
-                                    name: '',
+                                    genre: '',
                                     description: ''
                                 }
                             </code>
@@ -72,7 +72,7 @@
                 </tr>
                 <tr>
                     <td>Return data about a director</td>
-                    <td>/movies/directors/[directorsName]</td>
+                    <td>/movies/directors/:Name</td>
                     <td>Get</td>
                     <td>none</td>
                     <td>A JSON object holding data about the director:
@@ -95,7 +95,10 @@
                         <pre>
                             <code>
                                 {
-                                    name: '',
+                                    username: '',
+                                    password: '',
+                                    email: '',
+                                    birthday: '',
                                     favoriteMovies: []
                                 }
                             </code>
@@ -106,7 +109,10 @@
                             <code>
                                 {
                                     id: '',
-                                    name: '',
+                                    username: '',
+                                    password: '',
+                                    email: '',
+                                    birthday: '',
                                     favoriteMovies: []
                                 }
                             </code>
@@ -115,7 +121,7 @@
                 </tr>
                 <tr>
                     <td>Allow users to update their user information</td>
-                    <td>/users/[id]</td>
+                    <td>/users/:Username</td>
                     <td>Put</td>
                     <td>none</td>
                     <td>
@@ -123,7 +129,10 @@
                             <code>
                                 {
                                     id: '',
-                                    name: '',
+                                    username: '',
+                                    password: '',
+                                    email: '',
+                                    birthday: '',
                                     favoriteMovies: []
                                 }
                             </code>
@@ -131,18 +140,25 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>Allow users to add a movie to list of favorites</td>
+                    <td>/users/:username/movies/:MovieID</td>
+                    <td>Post</td>
+                    <td>none</td>
+                    <td>A message confirming that a movie has been added to favorite list.</td>
+                </tr>
+                <tr>
                     <td>Allow users to remove a movie from their favorite list</td>
-                    <td>/users/[id]/[movieName]</td>
+                    <td>/users/:Username/movies/:MovieID</td>
                     <td>Delete</td>
                     <td>none</td>
                     <td>A message showing that a movie has been removed from their favorites</td>
                 </tr>
                 <tr>
                     <td>Allow existing users to deregister</td>
-                    <td>/users/[id]</td>
+                    <td>/users/:Username</td>
                     <td>Delete</td>
                     <td>none</td>
-                    <td>A message indicating whether or not deregistration was complete</td>
+                    <td>A message indicating whether or not deregistration was completed successfully.</td>
                 </tr>
             </tbody>
         </table>
