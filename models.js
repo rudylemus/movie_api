@@ -35,5 +35,5 @@ userSchema.statics.hashPassword = (password) => {
 let Movies = mongoose.model('Movies', movieSchema);
 let User = mongoose.model('User', userSchema);
 
-module.exports.Movie = Movies;
+module.exports.Movies = Movies;
 module.exports.User = User;
