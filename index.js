@@ -5,12 +5,11 @@ const express = require('express'),
   app = express(),
   mongoose = require('mongoose'),
   Models = require('./models.js'),
-  Movies = Models.Movie,
+  Movies = Models.Movies,
   Users = Models.User;
 const { check, validationResult } = require('express-validator');
 
-// mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect( process.env.CONNECTION_URI || 'mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.json());
 
@@ -75,7 +74,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (r
     {
       Name: req.body.Name,
       Username: req.body.Username,
-      Password: req.body.Password,
+      Password: hashedPassword,
       Email: req.body.Email
     }
   },
@@ -204,7 +203,11 @@ app.get('/movies/genre/all/:Name', passport.authenticate('jwt', { session: false
 app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.findOne({ 'Genre.Name': req.params.genreName})
   .then((movie) => {
+    if (!movie) {
+        res.status(404).send('Movie not found');
+    } else {
     res.json(movie.Genre.Description);
+    }
   })
   .catch((err) => {
     console.error(err);
