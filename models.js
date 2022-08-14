@@ -32,8 +32,8 @@ userSchema.statics.hashPassword = (password) => {
     return bcrypt.compareSync(password, this.Password);
   };
 
-let Movies = mongoose.model('Movies', movieSchema);
+let Movie = mongoose.model('Movie', movieSchema);
 let User = mongoose.model('User', userSchema);
 
-module.exports.Movies = Movies;
+module.exports.Movie = Movie;
 module.exports.User = User;
