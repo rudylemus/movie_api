@@ -178,8 +178,8 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
 // Get movies by title
 app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find({ Title: req.params.Title})
-    .then((movie) => {
-      res.json(movie)
+    .then((movies) => {
+      res.json(movies)
     })
     .catch((err) => {
       console.error(err);
@@ -190,8 +190,8 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req
 // Select all movies by genre type
 app.get('/movies/genre/all/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find({ 'Genre.Name': req.params.Name})
-    .then((movie) => {
-      res.json(movie)
+    .then((movies) => {
+      res.json(movies)
     })
     .catch((err) => {
       console.error(err);
@@ -202,8 +202,8 @@ app.get('/movies/genre/all/:Name', passport.authenticate('jwt', { session: false
 // Get genre description
 app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.findOne({ 'Genre.Name': req.params.genreName})
-  .then((movie) => {
-    if (!movie) {
+  .then((movies) => {
+    if (!movies) {
         res.status(404).send('Movie not found');
     } else {
     res.json(movie.Genre.Description);
